@@ -6,3 +6,6 @@ def add(a,b):
 
 def sub(a,b):
     return a-b
+
+
+print("bye world")
