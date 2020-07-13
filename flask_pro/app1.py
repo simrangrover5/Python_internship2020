@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "<h1 style='color:red'>hi world</h1>"
+    return "<h1 style='color:red'>hello world</h1>"
 
 @app.route("/home/")
 def home():
