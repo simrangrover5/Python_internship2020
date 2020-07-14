@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <style>
+            label{
+                font-size: 40px;
+                font-family:Georgia, 'Times New Roman', Times, serif;
+                font-style: italic;
+                color : coral
+            }
+            input{
+                height: 30px;
+                width:20%
+            }
+            #rad{
+                height: 30px;
+                width: 40px;
+            }
+            #button{
+                background-color: black;
+                color:yellow;
+                font-size:20px;
+                font-style: italic;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                margin-left: 25%;
+            }
+            div{
+                height: 60%;
+                width:60%;
+                margin-left : 12%;
+                margin-top: 2%;
+                background-color: black;
+                border-radius: 10px;
+            }
+            form{
+                padding-left: 12%;
+                padding-top: 5%;
+            }
+        </style>
+    </head>
+    <body style="background: linear-gradient(#123456,#FF7133 );">
+        <h1 style="color:cadetblue;font-style: italic;margin-left: 30%;margin-top: 5%;">MY FORM</h1>
+        <div>
+        <form method="" action="https://www.w3schools.com/html/default.asp">
+            <label>Enter your Name : </label>
+            <input type="text" name="fname" ><br><br>
+            <label>Enter your email : </label>
+            <input type="email" name="email" required><br><br>
+            <label>Enter your password : </label>
+            <input type="password" name="passwd" placeholder="PASSWORD:"><br><br>
+            <input type="radio" name="gender" value="male" id="rad"><label>MALE</label><input type="radio" name="gender" value="female" id="rad"><label>FEMALE</label><br>
+            <!--<select name="course">
+                <option value="python">Python</option>
+                <option value="aws">AWS</option>
+                <option value="cloud">Cloud</option>
+            </select>-->
+            <input type="submit" value="LOGIN" id="button">
+        </form>
+        </div>
+        <!--border : 2px solid red (linewidth linestyle linecolor)-->
+    </body>
+
+</html>

@@ -1,0 +1,487 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\Simran Grover> cd C:\batches\online_batch\internship_batch\
+PS C:\batches\online_batch\internship_batch> cd .\djangoproject\blogweb\
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> ls
+
+
+    Directory: C:\batches\online_batch\internship_batch\djangoproject\blogweb
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       26-06-2020     17:17                blog
+d-----       25-06-2020     18:18                blogweb
+d-----       26-06-2020     17:34                static
+d-----       26-06-2020     17:34                templates
+d-----       26-06-2020     18:05                users
+-a----       25-06-2020     18:10              0 db.sqlite3
+-a----       25-06-2020     18:05            648 manage.py
+
+
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python .\manage.py
+
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[auth]
+    changepassword
+    createsuperuser
+
+[contenttypes]
+    remove_stale_contenttypes
+
+[django]
+    check
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush
+    inspectdb
+    loaddata
+    makemessages
+    makemigrations
+    migrate
+    sendtestemail
+    shell
+    showmigrations
+    sqlflush
+    sqlmigrate
+    sqlsequencereset
+    squashmigrations
+    startapp
+    startproject
+    test
+    testserver
+
+[sessions]
+    clearsessions
+
+[staticfiles]
+    collectstatic
+    findstatic
+    runserver
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python .\manage.py showmigrations
+admin
+ [X] 0001_initial
+ [X] 0002_logentry_remove_auto_add
+ [X] 0003_logentry_add_action_flag_choices
+auth
+ [X] 0001_initial
+ [X] 0002_alter_permission_name_max_length
+ [X] 0003_alter_user_email_max_length
+ [X] 0004_alter_user_username_opts
+ [X] 0005_alter_user_last_login_null
+ [X] 0006_require_contenttypes_0002
+ [X] 0007_alter_validators_add_error_messages
+ [X] 0008_alter_user_username_max_length
+ [X] 0009_alter_user_last_name_max_length
+ [X] 0010_alter_group_name_max_length
+ [X] 0011_update_proxy_permissions
+blog
+ (no migrations)
+contenttypes
+ [X] 0001_initial
+ [X] 0002_remove_content_type_name
+sessions
+ [X] 0001_initial
+users
+ [X] 0001_initial
+ [X] 0002_auto_20200629_1740
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python .\manage.py cretesuperuser
+Unknown command: 'cretesuperuser'. Did you mean createsuperuser?
+Type 'manage.py help' for usage.
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python .\manage.py createsuperuser
+Username (leave blank to use 'simrangrover'): simran
+Email address: simran@gmail.com
+Password:
+Password (again):
+Superuser created successfully.
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python .\manage.py shell
+Python 3.7.4 (default, Aug  9 2019, 18:34:13) [MSC v.1915 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.8.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: exit()
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python                                                     Python 3.7.4 (default, Aug  9 2019, 18:34:13) [MSC v.1915 64 bit (AMD64)] :: Anaconda, Inc. on win32
+
+Warning:
+This Python interpreter is in a conda environment, but the environment has
+not been activated.  Libraries may fail to load.  To activate this environment
+please see https://conda.io/activation
+
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from users.models import Adduser
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\batches\online_batch\internship_batch\djangoproject\blogweb\users\models.py", line 4, in <module>
+    class Adduser(models.Model):
+  File "C:\Anaconda\lib\site-packages\django\db\models\base.py", line 107, in __new__
+    app_config = apps.get_containing_app_config(module)
+  File "C:\Anaconda\lib\site-packages\django\apps\registry.py", line 252, in get_containing_app_config
+    self.check_apps_ready()
+  File "C:\Anaconda\lib\site-packages\django\apps\registry.py", line 134, in check_apps_ready
+    settings.INSTALLED_APPS
+  File "C:\Anaconda\lib\site-packages\django\conf\__init__.py", line 76, in __getattr__
+    self._setup(name)
+  File "C:\Anaconda\lib\site-packages\django\conf\__init__.py", line 61, in _setup
+    % (desc, ENVIRONMENT_VARIABLE))
+django.core.exceptions.ImproperlyConfigured: Requested setting INSTALLED_APPS, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
+>>> exit()
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python .\manage.py shell                                   Python 3.7.4 (default, Aug  9 2019, 18:34:13) [MSC v.1915 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.8.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from users.models import Adduser
+
+In [2]: print(dir(Adduser))
+['DoesNotExist', 'MultipleObjectsReturned', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_check_column_name_clashes', '_check_constraints', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_indexes', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_model_name_db_lookup_clashes', '_check_ordering', '_check_property_name_related_field_accessor_clashes', '_check_single_primary_key', '_check_swappable', '_check_unique_together', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', 'check', 'clean', 'clean_fields', 'date_error_message', 'delete', 'email', 'fname', 'from_db', 'full_clean', 'get_deferred_fields', 'id', 'lname', 'objects', 'password', 'pk', 'prepare_database_save', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'unique_error_message', 'validate_unique']
+
+In [3]: from django import models
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+<ipython-input-3-1f5a08703cae> in <module>
+----> 1 from django import models
+
+ImportError: cannot import name 'models' from 'django' (C:\Anaconda\lib\site-packages\django\__init__.py)
+
+In [4]: from django.db import models
+
+In [5]: print(dir(models))
+['Aggregate', 'AutoField', 'Avg', 'BLANK_CHOICE_DASH', 'BigAutoField', 'BigIntegerField', 'BinaryField', 'BooleanField', 'CASCADE', 'Case', 'CharField', 'CheckConstraint', 'Choices', 'CommaSeparatedIntegerField', 'Count', 'DEFERRED', 'DO_NOTHING', 'DateField', 'DateTimeField', 'DecimalField', 'DurationField', 'EmailField', 'Empty', 'Exists', 'Expression', 'ExpressionList', 'ExpressionWrapper', 'F', 'Field', 'FieldDoesNotExist', 'FileField', 'FilePathField', 'FilteredRelation', 'FloatField', 'ForeignKey', 'ForeignObject', 'Func', 'GenericIPAddressField', 'IPAddressField', 'ImageField', 'Index', 'IntegerChoices', 'IntegerField', 'Lookup', 'Manager', 'ManyToManyField', 'ManyToManyRel', 'ManyToOneRel', 'Max', 'Min', 'Model', 'NOT_PROVIDED', 'NullBooleanField', 'ObjectDoesNotExist', 'OneToOneField', 'OneToOneRel', 'OrderWrt', 'OuterRef', 'PROTECT', 'PositiveIntegerField', 'PositiveSmallIntegerField', 'Prefetch', 'ProtectedError', 'Q', 'QuerySet', 'RowRange', 'SET', 'SET_DEFAULT', 'SET_NULL', 'SlugField', 'SmallAutoField', 'SmallIntegerField', 'StdDev', 'Subquery', 'Sum', 'TextChoices', 'TextField', 'TimeField', 'Transform', 'URLField', 'UUIDField', 'UniqueConstraint', 'Value', 'ValueRange', 'Variance', 'When', 'Window', 'WindowFrame', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', 'aggregates', 'aggregates_all', 'base', 'constants', 'constraints', 'constraints_all', 'deletion', 'enums', 'enums_all', 'expressions', 'fields', 'fields_all', 'functions', 'indexes', 'indexes_all', 'lookups', 'manager', 'options', 'prefetch_related_objects', 'query', 'query_utils', 'signals', 'sql', 'utils']
+
+In [6]: from django import forms
+
+In [7]: print(dir(forms))
+['ALL_FIELDS', 'BaseForm', 'BaseFormSet', 'BaseInlineFormSet', 'BaseModelForm', 'BaseModelFormSet', 'BooleanField', 'BoundField', 'CharField', 'CheckboxInput', 'CheckboxSelectMultiple', 'ChoiceField', 'ClearableFileInput', 'ComboField', 'DateField', 'DateInput', 'DateTimeField', 'DateTimeInput', 'DecimalField', 'DurationField', 'EmailField', 'EmailInput', 'Field', 'FileField', 'FileInput', 'FilePathField', 'FloatField', 'Form', 'GenericIPAddressField', 'HiddenInput', 'ImageField', 'IntegerField', 'Media', 'MediaDefiningClass', 'ModelChoiceField', 'ModelForm', 'ModelMultipleChoiceField', 'MultiValueField', 'MultiWidget', 'MultipleChoiceField', 'MultipleHiddenInput', 'NullBooleanField', 'NullBooleanSelect', 'NumberInput', 'PasswordInput', 'RadioSelect', 'RegexField', 'Select', 'SelectDateWidget', 'SelectMultiple', 'SlugField', 'SplitDateTimeField', 'SplitDateTimeWidget', 'SplitHiddenDateTimeWidget', 'TextInput', 'Textarea', 'TimeField', 'TimeInput', 'TypedChoiceField', 'TypedMultipleChoiceField', 'URLField', 'URLInput', 'UUIDField', 'ValidationError', 'Widget', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', 'all_valid', 'boundfield', 'fields', 'fields_for_model', 'forms', 'formset_factory', 'formsets', 'inlineformset_factory', 'model_to_dict', 'modelform_factory', 'modelformset_factory', 'models', 'renderers', 'utils', 'widgets']
+
+In [8]: obj = Adduser()
+
+In [9]: print(dir(obj))
+['DoesNotExist', 'MultipleObjectsReturned', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_check_column_name_clashes', '_check_constraints', '_check_field_name_clashes', '_check_fields', '_check_id_field', '_check_index_together', '_check_indexes', '_check_local_fields', '_check_long_column_names', '_check_m2m_through_same_relationship', '_check_managers', '_check_model', '_check_model_name_db_lookup_clashes', '_check_ordering', '_check_property_name_related_field_accessor_clashes', '_check_single_primary_key', '_check_swappable', '_check_unique_together', '_do_insert', '_do_update', '_get_FIELD_display', '_get_next_or_previous_by_FIELD', '_get_next_or_previous_in_order', '_get_pk_val', '_get_unique_checks', '_meta', '_perform_date_checks', '_perform_unique_checks', '_save_parents', '_save_table', '_set_pk_val', '_state', 'check', 'clean', 'clean_fields', 'date_error_message', 'delete', 'email', 'fname', 'from_db', 'full_clean', 'get_deferred_fields', 'id', 'lname', 'objects', 'password', 'pk', 'prepare_database_save', 'refresh_from_db', 'save', 'save_base', 'serializable_value', 'unique_error_message', 'validate_unique']
+
+In [10]: obj.email = "tarun@mail.com"
+
+In [11]: obj.password = "password"
+
+In [12]: obj.fname = "tarun"
+
+In [13]: obj.lname = "singh"
+
+In [14]: obj.save()
+
+In [15]: Adduser.objects.all()
+Out[15]: <QuerySet [<Adduser: simran@mail.com>, <Adduser: aman@gmail.com>, <Adduser: amit@gmail.com>, <Adduser: tarun@mail.com>]>
+
+In [16]: simran = Adduser.objects.all()[0]
+
+In [17]: simran
+Out[17]: <Adduser: simran@mail.com>
+
+In [18]: simran.email
+Out[18]: 'simran@mail.com'
+
+In [19]: simran.password
+Out[19]: 'admin'
+
+In [20]: simran.lname
+Out[20]: 'grover'
+
+In [21]: simran.fname
+Out[21]: 'simran'
+
+In [22]: simran.abc = "10"
+
+In [23]: simran.abc
+Out[23]: '10'
+
+In [24]: simran.a = "hello"
+
+In [25]: simran.a
+Out[25]: 'hello'
+
+In [26]: for i in Adduser.objects.all():
+    ...:     print(i.email)
+    ...:
+simran@mail.com
+aman@gmail.com
+amit@gmail.com
+tarun@mail.com
+
+In [27]: for i in Adduser.objects.all():
+    ...:     print(i.email)
+    ...:     print(i.fname)
+    ...:
+simran@mail.com
+simran
+aman@gmail.com
+Aman
+amit@gmail.com
+amit
+tarun@mail.com
+tarun
+
+In [28]: tarun = Adduser.objects.all()[-1]
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+<ipython-input-28-e50a0dd63f44> in <module>
+----> 1 tarun = Adduser.objects.all()[-1]
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in __getitem__(self, k)
+    291                 (isinstance(k, slice) and (k.start is None or k.start >= 0) and
+    292                  (k.stop is None or k.stop >= 0))), \
+--> 293             "Negative indexing is not supported."
+    294
+    295         if self._result_cache is not None:
+
+AssertionError: Negative indexing is not supported.
+
+In [29]: tarun = Adduser.objects.all()[3]
+
+In [30]: tarun
+Out[30]: <Adduser: tarun@mail.com>
+
+In [31]: tarun.password
+Out[31]: 'password'
+
+In [32]: obj2 = Adduser()
+
+In [33]: print(type(Adduser.objects.all()))
+<class 'django.db.models.query.QuerySet'>
+
+In [34]: obj2
+Out[34]: <Adduser: >
+
+In [35]: obj2.email = "samprass@gmail.com"
+
+In [36]: obj2.email
+Out[36]: 'samprass@gmail.com'
+
+In [37]: obj2.password = "adminadmin"
+
+In [38]: obj2.password
+Out[38]: 'adminadmin'
+
+In [39]: obj2.save()
+
+In [40]: obj2.fname = "samprass"
+
+In [41]: obj2.save()
+
+In [42]: obj2.lname = "gupta"
+
+In [43]: obj2.save()
+
+In [44]: Adduser.objects.count()
+Out[44]: 5
+
+In [45]: select * from adduser; --> all
+  File "<ipython-input-45-97ee2215a2fd>", line 1
+    select * from adduser; --> all
+                ^
+SyntaxError: invalid syntax
+
+
+In [46]: Adduser.objects
+Out[46]: <django.db.models.manager.Manager at 0x238c88196c8>
+
+In [47]: print(dir(Adduser.objects))
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__slotnames__', '__str__', '__subclasshook__', '__weakref__', '_constructor_args', '_db', '_get_queryset_methods', '_hints', '_insert', '_queryset_class', '_set_creation_counter', '_update', 'aggregate', 'all', 'annotate', 'auto_created', 'bulk_create', 'bulk_update', 'check', 'complex_filter', 'contribute_to_class', 'count', 'create', 'creation_counter', 'dates', 'datetimes', 'db', 'db_manager', 'deconstruct', 'defer', 'difference', 'distinct', 'earliest', 'exclude', 'exists', 'explain', 'extra', 'filter', 'first', 'from_queryset', 'get', 'get_or_create', 'get_queryset', 'in_bulk', 'intersection', 'iterator', 'last', 'latest', 'model', 'name', 'none', 'only', 'order_by', 'prefetch_related', 'raw', 'reverse', 'select_for_update', 'select_related', 'union', 'update', 'update_or_create', 'use_in_migrations', 'using', 'values', 'values_list']
+
+In [48]: Adduser.objects.order_by(email)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-48-ad23e70706b1> in <module>
+----> 1 Adduser.objects.order_by(email)
+
+NameError: name 'email' is not defined
+
+In [49]: Adduser.objects.order_by()
+Out[49]: <QuerySet [<Adduser: simran@mail.com>, <Adduser: aman@gmail.com>, <Adduser: amit@gmail.com>, <Adduser: tarun@mail.com>, <Adduser: samprass@gmail.com>]>
+
+In [50]: help(Adduser.objects.order_by)
+Help on method order_by in module django.db.models.manager:
+
+order_by(*args, **kwargs) method of django.db.models.manager.Manager instance
+    Return a new QuerySet instance with the ordering changed.
+
+
+In [51]: Adduser.objects.order_by(Adduser.email)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-51-e4a635d663fd> in <module>
+----> 1 Adduser.objects.order_by(Adduser.email)
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in order_by(self, *field_names)
+   1087         obj = self._chain()
+   1088         obj.query.clear_ordering(force_empty=False)
+-> 1089         obj.query.add_ordering(*field_names)
+   1090         return obj
+   1091
+
+C:\Anaconda\lib\site-packages\django\db\models\sql\query.py in add_ordering(self, *ordering)
+   1900         errors = []
+   1901         for item in ordering:
+-> 1902             if not hasattr(item, 'resolve_expression') and not ORDER_PATTERN.match(item):
+   1903                 errors.append(item)
+   1904             if getattr(item, 'contains_aggregate', False):
+
+TypeError: expected string or bytes-like object
+
+In [52]: Adduser.objects.order_by(Adduser.objects.all[0])
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-52-69e32e96b4f8> in <module>
+----> 1 Adduser.objects.order_by(Adduser.objects.all[0])
+
+TypeError: 'method' object is not subscriptable
+
+In [53]: Adduser.objects.order_by(Adduser.objects.all()[0])
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-53-26eb0605cbb6> in <module>
+----> 1 Adduser.objects.order_by(Adduser.objects.all()[0])
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in order_by(self, *field_names)
+   1087         obj = self._chain()
+   1088         obj.query.clear_ordering(force_empty=False)
+-> 1089         obj.query.add_ordering(*field_names)
+   1090         return obj
+   1091
+
+C:\Anaconda\lib\site-packages\django\db\models\sql\query.py in add_ordering(self, *ordering)
+   1900         errors = []
+   1901         for item in ordering:
+-> 1902             if not hasattr(item, 'resolve_expression') and not ORDER_PATTERN.match(item):
+   1903                 errors.append(item)
+   1904             if getattr(item, 'contains_aggregate', False):
+
+TypeError: expected string or bytes-like object
+
+In [54]: Adduser.objects.order_by(Adduser.objects.id)
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-54-9f3570a10e2c> in <module>
+----> 1 Adduser.objects.order_by(Adduser.objects.id)
+
+AttributeError: 'Manager' object has no attribute 'id'
+
+In [55]: Adduser.objects.order_by(obj2)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-55-1ba0530f7f3b> in <module>
+----> 1 Adduser.objects.order_by(obj2)
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in order_by(self, *field_names)
+   1087         obj = self._chain()
+   1088         obj.query.clear_ordering(force_empty=False)
+-> 1089         obj.query.add_ordering(*field_names)
+   1090         return obj
+   1091
+
+C:\Anaconda\lib\site-packages\django\db\models\sql\query.py in add_ordering(self, *ordering)
+   1900         errors = []
+   1901         for item in ordering:
+-> 1902             if not hasattr(item, 'resolve_expression') and not ORDER_PATTERN.match(item):
+   1903                 errors.append(item)
+   1904             if getattr(item, 'contains_aggregate', False):
+
+TypeError: expected string or bytes-like object
+
+In [56]: Adduser.objects.order_by("email")
+Out[56]: <QuerySet [<Adduser: aman@gmail.com>, <Adduser: amit@gmail.com>, <Adduser: samprass@gmail.com>, <Adduser: simran@mail.com>, <Adduser: tarun@mail.com>]>
+
+In [57]: Adduser.objects.order_by("password")
+Out[57]: <QuerySet [<Adduser: simran@mail.com>, <Adduser: amit@gmail.com>, <Adduser: samprass@gmail.com>, <Adduser: aman@gmail.com>, <Adduser: tarun@mail.com>]>
+
+In [58]: for i in Adduser.objects.all():
+    ...:     print(i.password)
+    ...:
+admin
+password
+admin
+password
+adminadmin
+
+In [59]: for i in Adduser.objects.all():
+    ...:     print(i.password)
+    ...:     print(i.email)
+    ...:
+admin
+simran@mail.com
+password
+aman@gmail.com
+admin
+amit@gmail.com
+password
+tarun@mail.com
+adminadmin
+samprass@gmail.com
+
+In [60]: Adduser.objects.order_by("fname")
+Out[60]: <QuerySet [<Adduser: aman@gmail.com>, <Adduser: amit@gmail.com>, <Adduser: samprass@gmail.com>, <Adduser: simran@mail.com>, <Adduser: tarun@mail.com>]>
+
+In [61]: simran = Adduser.objects.get(email="simran@gmail.com")
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-61-9a558e05e675> in <module>
+----> 1 simran = Adduser.objects.get(email="simran@gmail.com")
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    415             raise self.model.DoesNotExist(
+    416                 "%s matching query does not exist." %
+--> 417                 self.model._meta.object_name
+    418             )
+    419         raise self.model.MultipleObjectsReturned(
+
+DoesNotExist: Adduser matching query does not exist.
+
+In [62]: simran = Adduser.objects.get(email="simran@mail.com")
+
+In [63]: simran
+Out[63]: <Adduser: simran@mail.com>
+
+In [64]: simran.fname
+Out[64]: 'simran'
+
+In [65]: simran.lname
+Out[65]: 'grover'
+
+In [66]: simran.password
+Out[66]: 'admin'
+
+In [67]:  

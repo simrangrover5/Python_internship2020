@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title></title>
+        <style></style>
+        <link>
+    </head>
+    <body>
+        <p> content/text </p>
+        <li></li>
+        <img>
+        .....
+    </body>
+
+    <br> --> break line
+    it gives you new line 
+    list --> 2 types --> ordered list, unordered list
+    <ol> --> ordered 
+    <ul> --> unordered
+    <i> --> italic
+    <b> --> bold
+    <u> --> underlined
+    <strong> --> show text strongly 
+    <mark> --> to mark any text
+    Attributes --> these are the properties of particular tag
+    p --> br
+    img --> src, height, width
+    a --> href
+    action --> you have give link over here at which you want to redirect user after submitting it 

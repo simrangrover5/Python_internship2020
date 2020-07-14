@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+        <style>
+            input{
+                height: 5%;
+                width: 25%;
+            }
+            body{
+                background-image: url("/static/one.jpg");
+            }
+            #key{
+                color: coral;
+                font-size: 20px;
+                font-family: cursive;
+            }
+            #value{
+                color: cornsilk;
+                font-size: 30px;
+                font-family: cursive;
+                font-style: italic;
+            }
+            div{
+                margin-left: 25%;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/todayweath/" method="POST">
+            <input type="text" name="city">
+            <input type="submit" value="SUBMIT">
+        </form>
+        <div>
+            {% if data %}
+            {% for key,value in data.items() %}
+                <label id="key">{{ key }} : </label><label id="value">{{ value }}</label><br>
+            {% endfor %}
+            {% endif %}
+            {% if icon %}
+            <img src=http://openweathermap.org/img/w/{{icon}}.png height="30%" width="30%">
+            {% endif %}
+        </div>
+    </body>
+</html>

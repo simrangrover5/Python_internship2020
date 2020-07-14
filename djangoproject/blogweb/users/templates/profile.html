@@ -1,0 +1,14 @@
+<html>
+    <head>
+        {% load static %}
+    </head>
+    <body>
+        {% include "afterlogin.html" %}
+        {% block head %}
+        {% endblock %}
+        <h1>Firstname : {{ data.fname }}</h1>
+        <h1>Lastname : {{ data.lname }}</h1>
+        <h1>Email : {{ data.email }}</h1>
+        <img src=/static/images/{{data.image}} height="30%" width="30%">
+    </body>
+</html>

@@ -1,0 +1,759 @@
+
+Setting environment for using XAMPP for Windows.
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use internship_batch;
+Database changed
+MariaDB [internship_batch]> show tables;
++----------------------------+
+| Tables_in_internship_batch |
++----------------------------+
+| fees                       |
+| student                    |
++----------------------------+
+2 rows in set (0.01 sec)
+
+MariaDB [internship_batch]> create table address(aid int(5) primary key,sid int(5) primary key,city varchar(100),street varchar(100));
+ERROR 1068 (42000): Multiple primary key defined
+MariaDB [internship_batch]> create table address(aid int(5) primary key,sid int(5),city varchar(100),street varchar(100),foreign key(sid) references student(id));
+Query OK, 0 rows affected (0.11 sec)
+
+MariaDB [internship_batch]> show tables;
++----------------------------+
+| Tables_in_internship_batch |
++----------------------------+
+| address                    |
+| fees                       |
+| student                    |
++----------------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> insert into address values(1,101,"jaipur","raja park"),(2,102,"jaipur","malviya nagar"),(3,103,"bhopal","tilak nagar"),(4,104,"delhi","vaishali"),(5,107,"delhi","patel nagar");
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [internship_batch]> select * from address;
++-----+------+--------+---------------+
+| aid | sid  | city   | street        |
++-----+------+--------+---------------+
+|   1 |  101 | jaipur | raja park     |
+|   2 |  102 | jaipur | malviya nagar |
+|   3 |  103 | bhopal | tilak nagar   |
+|   4 |  104 | delhi  | vaishali      |
+|   5 |  107 | delhi  | patel nagar   |
++-----+------+--------+---------------+
+5 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees order by fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.04 sec)
+
+MariaDB [internship_batch]> select fees,diposit from student orderby diposit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'diposit' at line 1
+MariaDB [internship_batch]> select fees,diposit from student order by diposit;
+ERROR 1054 (42S22): Unknown column 'fees' in 'field list'
+MariaDB [internship_batch]> select fees,diposit from fees order by diposit;
++-------+---------+
+| fees  | diposit |
++-------+---------+
+| 15000 |    9000 |
+| 15000 |    9000 |
+| 12000 |   10000 |
+| 13000 |   11000 |
+| 22000 |   15000 |
+| 25000 |   19000 |
++-------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select fees,diposit from fees order by diposit desc;
++-------+---------+
+| fees  | diposit |
++-------+---------+
+| 25000 |   19000 |
+| 22000 |   15000 |
+| 13000 |   11000 |
+| 12000 |   10000 |
+| 15000 |    9000 |
+| 15000 |    9000 |
++-------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees order by fees,discount;
+ERROR 1054 (42S22): Unknown column 'discount' in 'order clause'
+MariaDB [internship_batch]> select * from fees order by fees discount;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'discount' at line 1
+MariaDB [internship_batch]> select * from fees order by fees,disount;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees order by fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fess order by disount,fees;
+ERROR 1146 (42S02): Table 'internship_batch.fess' doesn't exist
+MariaDB [internship_batch]> select * from fees order by disount,fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> update fees set didount=3000 where sid=107;
+ERROR 1054 (42S22): Unknown column 'didount' in 'field list'
+MariaDB [internship_batch]> update fees set disount=3000 where sid=107;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [internship_batch]> update fees set disount=2500 where sid=107;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    2500 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> update fees set disount=2500 where sid=103;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    2500 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    2500 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees order by disount,fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   3 |  103 | 15000 |    2500 |    9000 |
+|   5 |  107 | 25000 |    2500 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student group by course;
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 103 | anisha  | aws    | female |
+| 105 | devraj  | cloud  | male   |
+| 101 | shivani | ds     | female |
+| 102 | rohan   | ml     | male   |
+| 106 | koashal | python | male   |
++-----+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> groupby will give you the first row of each group
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'groupby will give you the first row of each group' at line 1
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*),course from students group by course;
+ERROR 1146 (42S02): Table 'internship_batch.students' doesn't exist
+MariaDB [internship_batch]> select count(*),course from student group by course;
++----------+--------+
+| count(*) | course |
++----------+--------+
+|        2 | aws    |
+|        1 | cloud  |
+|        1 | ds     |
+|        1 | ml     |
+|        2 | python |
++----------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*),city from address group by city;
++----------+--------+
+| count(*) | city   |
++----------+--------+
+|        1 | bhopal |
+|        2 | delhi  |
+|        2 | jaipur |
++----------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select city from address group by city having count(*)=1;
++--------+
+| city   |
++--------+
+| bhopal |
++--------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select course from student group by course having count(*)=1;
++--------+
+| course |
++--------+
+| cloud  |
+| ds     |
+| ml     |
++--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*),course from student group by course;
++----------+--------+
+| count(*) | course |
++----------+--------+
+|        2 | aws    |
+|        1 | cloud  |
+|        1 | ds     |
+|        1 | ml     |
+|        2 | python |
++----------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select user from mysql.user;
++--------------+
+| user         |
++--------------+
+| root         |
+| user1        |
+| root         |
+| myadmin      |
+| username     |
+| username1    |
+|              |
+| admin        |
+| adminad      |
+| adminadmin   |
+| akshay       |
+| ayushi       |
+| bank_app     |
+| batch        |
+| batch415     |
+| batch4pm     |
+| batch5pm     |
+| flask        |
+| html         |
+| kapil        |
+| mahima       |
+| nupur        |
+| pma          |
+| project      |
+| project1     |
+| ramesh       |
+| root         |
+| simran       |
+| simrangrover |
+| student      |
+| tarun        |
+| user1        |
+| yogesh       |
++--------------+
+33 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> create user 'internship'@'localhost' identified by 'pass';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [internship_batch]> select user from mysql.user;
++--------------+
+| user         |
++--------------+
+| root         |
+| user1        |
+| root         |
+| myadmin      |
+| username     |
+| username1    |
+|              |
+| admin        |
+| adminad      |
+| adminadmin   |
+| akshay       |
+| ayushi       |
+| bank_app     |
+| batch        |
+| batch415     |
+| batch4pm     |
+| batch5pm     |
+| flask        |
+| html         |
+| internship   |
+| kapil        |
+| mahima       |
+| nupur        |
+| pma          |
+| project      |
+| project1     |
+| ramesh       |
+| root         |
+| simran       |
+| simrangrover |
+| student      |
+| tarun        |
+| user1        |
+| yogesh       |
++--------------+
+34 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u internship -p
+Enter password: ****
+ERROR 1045 (28000): Access denied for user 'internship'@'localhost' (using password: YES)
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u internship -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 4
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| test               |
++--------------------+
+2 rows in set (0.00 sec)
+
+MariaDB [(none)]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 5
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privileges on internship_batch.* to 'internship'@'localhost;
+    '> ;
+    '>
+    '>
+    '> Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privileges on internship_batch.* to 'internship'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> exit;
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 7
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u internship -p
+Enter password: ****
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| internship_batch   |
+| test               |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [(none)]> use internship_batch;
+Database changed
+MariaDB [internship_batch]> show tables;
++----------------------------+
+| Tables_in_internship_batch |
++----------------------------+
+| address                    |
+| fees                       |
+| student                    |
++----------------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> insert into student(name,course,gender) values("naresh","ds","male");
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
+| 108 | naresh   | ds     | male   |
++-----+----------+--------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> select * from students;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> select * from internship_batch.student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
+| 108 | naresh   | ds     | male   |
++-----+----------+--------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [(none)]> use internship_batch;
+Database changed
+MariaDB [internship_batch]> create user 'internship'@'localhost' identified by 'passwd';
+ERROR 1396 (HY000): Operation CREATE USER failed for 'internship'@'localhost'
+MariaDB [internship_batch]> create user 'intern'@'localhost' identified by 'passwd';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [internship_batch]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u intern -p
+Enter password: ******
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| test               |
++--------------------+
+2 rows in set (0.00 sec)
+
+MariaDB [(none)]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant SELECT,INSERT privileges on internship_batch.student to 'intern'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privileges on internship_batch.student to 'intern'@'localhost'' at line 1
+MariaDB [(none)]> grant SELECT privileges on internship_batch.student to 'intern'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privileges on internship_batch.student to 'intern'@'localhost'' at line 1
+MariaDB [(none)]> grant all privileges on internship_batch.student to 'intern'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> grant SELECT privilege on internship_batch.student to 'intern'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privilege on internship_batch.student to 'intern'@'localhost'' at line 1
+MariaDB [(none)]> grant select privilege on internship_batch.student to 'intern'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privilege on internship_batch.student to 'intern'@'localhost'' at line 1
+MariaDB [(none)]> grant select privileges on internship_batch.student to 'intern'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privileges on internship_batch.student to 'intern'@'localhost'' at line 1
+MariaDB [(none)]> grant create privileges on internship_batch.student to 'intern'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privileges on internship_batch.student to 'intern'@'localhost'' at line 1
+MariaDB [(none)]> grant all privileges on internship_batch.student to 'intern'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u intern -p
+Enter password: ******
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 12
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| internship_batch   |
+| test               |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [(none)]> use internship_batch;
+Database changed
+MariaDB [internship_batch]> show tables;
++----------------------------+
+| Tables_in_internship_batch |
++----------------------------+
+| student                    |
++----------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
+| 108 | naresh   | ds     | male   |
++-----+----------+--------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> exit
+Bye
+
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 13
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use internship_batch;
+Database changed
+MariaDB [internship_batch]> show tables;
++----------------------------+
+| Tables_in_internship_batch |
++----------------------------+
+| address                    |
+| fees                       |
+| student                    |
++----------------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
+| 108 | naresh   | ds     | male   |
++-----+----------+--------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where name like 'a%';
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 103 | anisha  | aws    | female |
+| 104 | anushka | aws    | female |
++-----+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where name like '%a';
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where name like 'a%a';
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 103 | anisha  | aws    | female |
+| 104 | anushka | aws    | female |
++-----+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where name like 'k%';
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 106 | koashal | python | male   |
++-----+---------+--------+--------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where name like '%a' or name like '%n'
+    -> l
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'l' at line 2
+MariaDB [internship_batch]> select * from student where name like '%a' or name like '%n';
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where name like '____n';
++-----+-------+--------+--------+
+| id  | name  | course | gender |
++-----+-------+--------+--------+
+| 102 | rohan | ml     | male   |
++-----+-------+--------+--------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where name like '______';
++-----+--------+--------+--------+
+| id  | name   | course | gender |
++-----+--------+--------+--------+
+| 103 | anisha | aws    | female |
+| 105 | devraj | cloud  | male   |
+| 108 | naresh | ds     | male   |
++-----+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]>

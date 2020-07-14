@@ -1,0 +1,45 @@
+pip install django
+djangoproject --> django-admin startproject project_name
+djangoproject --> blogapp --> blogapp
+                                urls.py --> path
+                                views.py --> functions/class
+                                settings.py --> configurations project
+                                wsgi.py --> web server gateway interface (default)
+                                asgi.py --> asynchronous gateway interface
+                                __init__.py
+                              manage.py
+to run your server --> python manage.py runserver localhost:80
+go to your urls.py file write path and then redirect it to views.py
+1 --> users app(folder)
+2 --> blog data app (folder)
+command to make app
+python manage.py startapp users 
+            blogapp --> blogapp
+                        manage.py
+                        users
+                            urls.py --> url
+                            views.py --> functions
+                            models.py --> tables
+                            test.py --> tests
+                            admin.py --> register your models here to show to your admin
+                            apps.py --> configuration of app
+                            __init__.py
+
+models.py --> model --> adduser (table)
+database --> mysql (internship_batch)
+1. python manage.py makemigrations
+read models.py and will make a file consists of your models detail
+suppose it make a file named 0001
+2. python manage.py sqlmigrate users 0001
+create a command
+3. python manage.py migrate
+read the command and make changes along with it on database
+or will add your table into database
+
+Three ways to insert your data
+1. through database shell
+2. through admin panel
+localhost/admin
+admin.py --> register model
+3. through django shell
+python manage.py shell

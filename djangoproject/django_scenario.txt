@@ -1,0 +1,68 @@
+Main Project
+
+Djangoproject --> django-admin startproject blogweb
+Djangoproject --> blogweb --> blogweb
+                                    urls --> path
+                                    settings --> whole project settings
+                                    views --> functions(View)
+                             manage.py --> manage your project
+
+1. urls.py --> path define (redirect to views.py)
+2. views.py --> define function and return a valid response
+
+The first request is send to the project --> urls 
+redirect from project.urls to app.urls (app --> can app)
+
+3. Create app and enter its details into settings.py
+
+
+APP 
+1. python manage.py startapp app1
+2. settings.py --> installed_app --> app register
+3. go to project urls and write a path at which we will redirect it to app urls
+4. go to your app1 urls and write path which you want to handle and redirect it to function which will execute when the path is request
+5. return your html page at that path
+    for the above step you need to do configurations for templates and static in setting.py file
+6. render your html page
+7. make form in forms.py file
+    app1 --> forms.py      
+8. Integrate forms.py and views.py
+        form --> forms.py  --> login.html 
+        You cannot integrate form and html page directly so contact you view part
+        forms.py --> form --> views.py
+        views.py --> form --> index.html
+    a. go to your index.html page define path for that link
+    b. define your url/path in your urls.py file
+    c. define function in views.py file in which you have redirected
+    d. go to your html page and accept your form
+
+9. get data from form and store it into database
+    a. define action in your html page
+    b. define that action url in your urls.py file
+    c. define function in views.py file and get the data
+
+10. to store data into models
+    a. create your model(table) in your models.py file
+    b. select the database that you want to use in your project
+    c. configure the settings of database in your settings.py file and connect to that database
+    d. migrations command
+        1. python manage.py makemigrations
+            the file created in this migration will be used further
+        2. python manage.py sqlmigrate app1 0001
+        3. python manage.py migrate
+        You table is integrated with your database and you can store your data
+    e. The data get in your 9 step store that data into your models(table)
+        Use the command to store your data
+        ****See your commands from the file shared by your trainer****
+
+11. Admin Panel
+    Path --> /admin/ --> localhost/admin
+    python manage.py createsuperuser
+        set username
+        set password
+    login into /admin/
+    to register your model
+        app1 --> admin.py and enter your model there
+        admin.site.regiter(modelname)
+    After it you can manage and handle your data from admin panel
+

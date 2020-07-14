@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-image: url("/static/one.jpg");
+                background-size: cover;
+            }
+            form{
+                margin-top: 20%;
+                margin-left: 30%;
+            }
+            label{
+                color: blanchedalmond;
+                font-size: 30px;
+            }
+            #sig{
+                color: coral;
+                background-color: black;
+                height: 30px;
+                width: 100px;
+                margin-left: 12%;
+            }
+            small{
+                color: darkorange;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="POST" action="/aftersignup/">
+            <h1 style="color:red;">{{error}}</h1>
+            <label>
+                Enter your email
+            </label>
+            <input type="email" name="email"><br><br>
+            <label>Enter your password</label>
+            <input type="password" name="passwd"><br>
+            <small>Password must be 8 characters long and match conditions</small><br><br>
+            <label>Select your Gender</label>
+            <input type="radio" name="gender" value="male"><label>Male</label><input type="radio" name="gender" value="female"><label>Female</label><br><br>
+            <input type="submit" value="SIGNUP" id="sig">
+        </form>
+    </body>
+</html>

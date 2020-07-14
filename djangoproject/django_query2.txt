@@ -1,0 +1,381 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\Simran Grover> cd C:\batches\online_batch\internship_batch\djangoproject\blogweb\
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> ls
+
+
+    Directory: C:\batches\online_batch\internship_batch\djangoproject\blogweb
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       26-06-2020     17:17                blog
+d-----       25-06-2020     18:18                blogweb
+d-----       26-06-2020     17:34                static
+d-----       26-06-2020     17:34                templates
+d-----       26-06-2020     18:05                users
+-a----       25-06-2020     18:10              0 db.sqlite3
+-a----       25-06-2020     18:05            648 manage.py
+
+
+PS C:\batches\online_batch\internship_batch\djangoproject\blogweb> python .\manage.py shell
+Python 3.7.4 (default, Aug  9 2019, 18:34:13) [MSC v.1915 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.8.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from users.models import Adduser
+
+In [2]: Adduser.objects.all()
+Out[2]: ---------------------------------------------------------------------------
+OperationalError                          Traceback (most recent call last)
+C:\Anaconda\lib\site-packages\django\db\backends\base\base.py in ensure_connection(self)
+    219             with self.wrap_database_errors:
+--> 220                 self.connect()
+    221
+
+C:\Anaconda\lib\site-packages\django\utils\asyncio.py in inner(*args, **kwargs)
+     25             # Pass onwards.
+---> 26             return func(*args, **kwargs)
+     27         return inner
+
+C:\Anaconda\lib\site-packages\django\db\backends\base\base.py in connect(self)
+    196         conn_params = self.get_connection_params()
+--> 197         self.connection = self.get_new_connection(conn_params)
+    198         self.set_autocommit(self.settings_dict['AUTOCOMMIT'])
+
+C:\Anaconda\lib\site-packages\django\utils\asyncio.py in inner(*args, **kwargs)
+     25             # Pass onwards.
+---> 26             return func(*args, **kwargs)
+     27         return inner
+
+C:\Anaconda\lib\site-packages\django\db\backends\mysql\base.py in get_new_connection(self, conn_params)
+    232     def get_new_connection(self, conn_params):
+--> 233         return Database.connect(**conn_params)
+    234
+
+C:\Anaconda\lib\site-packages\MySQLdb\__init__.py in Connect(*args, **kwargs)
+     83     from MySQLdb.connections import Connection
+---> 84     return Connection(*args, **kwargs)
+     85
+
+C:\Anaconda\lib\site-packages\MySQLdb\connections.py in __init__(self, *args, **kwargs)
+    178
+--> 179         super(Connection, self).__init__(*args, **kwargs2)
+    180         self.cursorclass = cursorclass
+
+OperationalError: (2002, "Can't connect to MySQL server on 'localhost' (10061)")
+
+The above exception was the direct cause of the following exception:
+
+OperationalError                          Traceback (most recent call last)
+C:\Anaconda\lib\site-packages\IPython\core\formatters.py in __call__(self, obj)
+    700                 type_pprinters=self.type_printers,
+    701                 deferred_pprinters=self.deferred_printers)
+--> 702             printer.pretty(obj)
+    703             printer.flush()
+    704             return stream.getvalue()
+
+C:\Anaconda\lib\site-packages\IPython\lib\pretty.py in pretty(self, obj)
+    400                         if cls is not object \
+    401                                 and callable(cls.__dict__.get('__repr__')):
+--> 402                             return _repr_pprint(obj, self, cycle)
+    403
+    404             return _default_pprint(obj, self, cycle)
+
+C:\Anaconda\lib\site-packages\IPython\lib\pretty.py in _repr_pprint(obj, p, cycle)
+    695     """A pprint that just redirects to the normal repr function."""
+    696     # Find newlines and replace them with p.break_()
+--> 697     output = repr(obj)
+    698     for idx,output_line in enumerate(output.splitlines()):
+    699         if idx:
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in __repr__(self)
+    250
+    251     def __repr__(self):
+--> 252         data = list(self[:REPR_OUTPUT_SIZE + 1])
+    253         if len(data) > REPR_OUTPUT_SIZE:
+    254             data[-1] = "...(remaining elements truncated)..."
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in __iter__(self)
+    274                - Responsible for turning the rows into model objects.
+    275         """
+--> 276         self._fetch_all()
+    277         return iter(self._result_cache)
+    278
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in _fetch_all(self)
+   1259     def _fetch_all(self):
+   1260         if self._result_cache is None:
+-> 1261             self._result_cache = list(self._iterable_class(self))
+   1262         if self._prefetch_related_lookups and not self._prefetch_done:
+   1263             self._prefetch_related_objects()
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in __iter__(self)
+     55         # Execute the query. This will also fill compiler.select, klass_info,
+     56         # and annotations.
+---> 57         results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+     58         select, klass_info, annotation_col_map = (compiler.select, compiler.klass_info,
+     59                                                   compiler.annotation_col_map)
+
+C:\Anaconda\lib\site-packages\django\db\models\sql\compiler.py in execute_sql(self, result_type, chunked_fetch, chunk_size)
+   1148             cursor = self.connection.chunked_cursor()
+   1149         else:
+-> 1150             cursor = self.connection.cursor()
+   1151         try:
+   1152             cursor.execute(sql, params)
+
+C:\Anaconda\lib\site-packages\django\utils\asyncio.py in inner(*args, **kwargs)
+     24                         raise SynchronousOnlyOperation(message)
+     25             # Pass onwards.
+---> 26             return func(*args, **kwargs)
+     27         return inner
+     28     # If the message is actually a function, then be a no-arguments decorator.
+
+C:\Anaconda\lib\site-packages\django\db\backends\base\base.py in cursor(self)
+    258     def cursor(self):
+    259         """Create a cursor, opening a connection if necessary."""
+--> 260         return self._cursor()
+    261
+    262     @async_unsafe
+
+C:\Anaconda\lib\site-packages\django\db\backends\base\base.py in _cursor(self, name)
+    234
+    235     def _cursor(self, name=None):
+--> 236         self.ensure_connection()
+    237         with self.wrap_database_errors:
+    238             return self._prepare_cursor(self.create_cursor(name))
+
+C:\Anaconda\lib\site-packages\django\utils\asyncio.py in inner(*args, **kwargs)
+     24                         raise SynchronousOnlyOperation(message)
+     25             # Pass onwards.
+---> 26             return func(*args, **kwargs)
+     27         return inner
+     28     # If the message is actually a function, then be a no-arguments decorator.
+
+C:\Anaconda\lib\site-packages\django\db\backends\base\base.py in ensure_connection(self)
+    218         if self.connection is None:
+    219             with self.wrap_database_errors:
+--> 220                 self.connect()
+    221
+    222     # ##### Backend-specific wrappers for PEP-249 connection methods #####
+
+C:\Anaconda\lib\site-packages\django\db\utils.py in __exit__(self, exc_type, exc_value, traceback)
+     88                 if dj_exc_type not in (DataError, IntegrityError):
+     89                     self.wrapper.errors_occurred = True
+---> 90                 raise dj_exc_value.with_traceback(traceback) from exc_value
+     91
+     92     def __call__(self, func):
+
+C:\Anaconda\lib\site-packages\django\db\backends\base\base.py in ensure_connection(self)
+    218         if self.connection is None:
+    219             with self.wrap_database_errors:
+--> 220                 self.connect()
+    221
+    222     # ##### Backend-specific wrappers for PEP-249 connection methods #####
+
+C:\Anaconda\lib\site-packages\django\utils\asyncio.py in inner(*args, **kwargs)
+     24                         raise SynchronousOnlyOperation(message)
+     25             # Pass onwards.
+---> 26             return func(*args, **kwargs)
+     27         return inner
+     28     # If the message is actually a function, then be a no-arguments decorator.
+
+C:\Anaconda\lib\site-packages\django\db\backends\base\base.py in connect(self)
+    195         # Establish the connection
+    196         conn_params = self.get_connection_params()
+--> 197         self.connection = self.get_new_connection(conn_params)
+    198         self.set_autocommit(self.settings_dict['AUTOCOMMIT'])
+    199         self.init_connection_state()
+
+C:\Anaconda\lib\site-packages\django\utils\asyncio.py in inner(*args, **kwargs)
+     24                         raise SynchronousOnlyOperation(message)
+     25             # Pass onwards.
+---> 26             return func(*args, **kwargs)
+     27         return inner
+     28     # If the message is actually a function, then be a no-arguments decorator.
+
+C:\Anaconda\lib\site-packages\django\db\backends\mysql\base.py in get_new_connection(self, conn_params)
+    231     @async_unsafe
+    232     def get_new_connection(self, conn_params):
+--> 233         return Database.connect(**conn_params)
+    234
+    235     def init_connection_state(self):
+
+C:\Anaconda\lib\site-packages\MySQLdb\__init__.py in Connect(*args, **kwargs)
+     82     """Factory function for connections.Connection."""
+     83     from MySQLdb.connections import Connection
+---> 84     return Connection(*args, **kwargs)
+     85
+     86 connect = Connection = Connect
+
+C:\Anaconda\lib\site-packages\MySQLdb\connections.py in __init__(self, *args, **kwargs)
+    177         autocommit = kwargs2.pop('autocommit', False)
+    178
+--> 179         super(Connection, self).__init__(*args, **kwargs2)
+    180         self.cursorclass = cursorclass
+    181         self.encoders = dict([ (k, v) for k, v in conv.items()
+
+OperationalError: (2002, "Can't connect to MySQL server on 'localhost' (10061)")
+
+In [3]: from users.models import Adduser
+
+In [4]: Adduser.objects.all()
+Out[4]: <QuerySet [<Adduser: aman@gmail.com>, <Adduser: amit@gmail.com>, <Adduser: tarun@mail.com>, <Adduser: samprass@gmail.com>]>
+
+In [5]: Adduser.objects.get(email="tarun@mail.com")
+Out[5]: <Adduser: tarun@mail.com>
+
+In [6]: tarun = Adduser.objects.get(email="tarun@mail.com")
+
+In [7]: tarun.password
+Out[7]: 'password'
+
+In [8]: tarun.email
+Out[8]: 'tarun@mail.com'
+
+In [9]: tarun.fname
+Out[9]: 'tarun'
+
+In [10]: tarun = Adduser.objects.get(password="admin")
+
+In [11]: tarun.email
+Out[11]: 'amit@gmail.com'
+
+In [12]: tarun = Adduser.objects.get(password="password")
+---------------------------------------------------------------------------
+MultipleObjectsReturned                   Traceback (most recent call last)
+<ipython-input-12-d7aeefaf91fd> in <module>
+----> 1 tarun = Adduser.objects.get(password="password")
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    420             'get() returned more than one %s -- it returned %s!' % (
+    421                 self.model._meta.object_name,
+--> 422                 num if not limit or num < limit else 'more than %s' % (limit - 1),
+    423             )
+    424         )
+
+MultipleObjectsReturned: get() returned more than one Adduser -- it returned 2!
+
+In [13]: Adduser.objects.filter(password="password")
+Out[13]: <QuerySet [<Adduser: aman@gmail.com>, <Adduser: tarun@mail.com>]>
+
+In [14]: a = Adduser.objects.filter(password="password")
+
+In [15]: a[0
+    ...: ]
+Out[15]: <Adduser: aman@gmail.com>
+
+In [16]: a[1]
+Out[16]: <Adduser: tarun@mail.com>
+
+In [17]: aman - a[0]
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-17-64bd5dfbf0fa> in <module>
+----> 1 aman - a[0]
+
+NameError: name 'aman' is not defined
+
+In [18]: aman = a[0]
+
+In [19]: aman.email
+Out[19]: 'aman@gmail.com'
+
+In [20]: aman.fname
+Out[20]: 'Aman'
+
+In [21]: aman.lname
+Out[21]: 'Gupta'
+
+In [22]: Adduser.objects.count()
+Out[22]: 4
+
+In [23]: newobj = Adduser()
+
+In [24]: newobj.fname = "simran"
+
+In [25]: newobj.lname = "grover"
+
+In [26]: newobj.email = "simrangrover@gmail.com"
+
+In [27]: newobj.password = "admin"
+
+In [28]: newobj.save()
+
+In [29]: Adduser.objects.create(fname="anisha",lname="sharma",email="anisha@mail.com",password="anisha");
+
+In [30]: aman = Adduser.objects.get(email="aman@gmail.com")
+
+In [31]: aman
+Out[31]: <Adduser: aman@gmail.com>
+
+In [32]: aman.delete()
+Out[32]: (1, {'users.Adduser': 1})
+
+In [33]: newdata = {"fname" : "aman","lname":"gupta","email" : "aman@gmail.com","password" : "admin"}
+
+In [34]: Adduser.objects.create(newdata);
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-34-f2bbe0cc414f> in <module>
+----> 1 Adduser.objects.create(newdata);
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+TypeError: create() takes 1 positional argument but 2 were given
+
+In [35]: Adduser.objects.create(newdata.items());
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-35-07e6926e037f> in <module>
+----> 1 Adduser.objects.create(newdata.items());
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+TypeError: create() takes 1 positional argument but 2 were given
+
+In [36]: Adduser.objects.create(**newdata);
+
+In [37]: Adduser.objects.get(email="abc.com")
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-37-59e71fca29c8> in <module>
+----> 1 Adduser.objects.get(email="abc.com")
+
+C:\Anaconda\lib\site-packages\django\db\models\manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+C:\Anaconda\lib\site-packages\django\db\models\query.py in get(self, *args, **kwargs)
+    415             raise self.model.DoesNotExist(
+    416                 "%s matching query does not exist." %
+--> 417                 self.model._meta.object_name
+    418             )
+    419         raise self.model.MultipleObjectsReturned(
+
+DoesNotExist: Adduser matching query does not exist.
+
+In [38]:  

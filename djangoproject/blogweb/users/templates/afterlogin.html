@@ -1,0 +1,22 @@
+{% block head %}
+<html>
+    <head>
+        {% load static %}
+        <link type="text/css" rel="stylesheet" href="{% static 'main.css'%}">
+    </head>
+    <body>
+        <div>
+            <ul>
+                
+                <li><a href="/blog/addblog/">ADDBLOG</a></li>
+                <li><a href="/user/logout/">LOGOUT</a></li>
+                <li><a href="#">CONTACT</a></li>
+                <li><a href="/user/profile/">PROFILE</a></li>
+                <li><a href="/blog/myblog/">MYBLOGS</a></li>
+                <li><a href="/blog/allblog/">ALLBLOGS</a></li>
+            </ul>
+        </div>
+        <h1>{{error}}</h1>
+    </body>
+</html>
+{% endblock %}

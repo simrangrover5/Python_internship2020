@@ -1,0 +1,14 @@
+templates --> index.html --> login (link) --> /login/
+main.py --> /login/ --> function define --> login --> login.html (return)
+(same for signup)
+Now we want to get the data of signup/login and store/retrive from database
+templates --> signup.html --> action --> /aftersignup/ 
+(database --> table --> users --> columns which will store the data of signup users)
+main.py --> /aftersignup/ --> function --> connect database --> command to insert data 
+
+Data/ User information
+Cookies --> Client Side
+            Insecure
+Session --> Server Side
+            Secure
+            Particular Time Period(5 min)

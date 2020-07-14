@@ -1,0 +1,677 @@
+
+Setting environment for using XAMPP for Windows.
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use internship_batch;
+Database changed
+MariaDB [internship_batch]> select * from students;
+ERROR 1146 (42S02): Table 'internship_batch.students' doesn't exist
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
+| 108 | naresh   | ds     | male   |
++-----+----------+--------+--------+
+8 rows in set (1.21 sec)
+
+MariaDB [internship_batch]> select distinct course from student;
++--------+
+| course |
++--------+
+| ds     |
+| ml     |
+| aws    |
+| cloud  |
+| python |
++--------+
+5 rows in set (0.07 sec)
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    2500 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    2500 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.05 sec)
+
+MariaDB [internship_batch]> select * from fees where disount between 1500 and 3000;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   3 |  103 | 15000 |    2500 |    9000 |
+|   5 |  107 | 25000 |    2500 |   19000 |
++-----+------+-------+---------+---------+
+3 rows in set (0.02 sec)
+
+MariaDB [internship_batch]> select fees+3000 from fees;
++-----------+
+| fees+3000 |
++-----------+
+|     15000 |
+|     16000 |
+|     18000 |
+|     18000 |
+|     28000 |
+|     25000 |
++-----------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student inner join fees on student.id = fees.sid;
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| id  | name     | course | gender | fid | sid  | fees  | disount | diposit |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| 101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 105 | devraj   | cloud  | male   |   6 |  105 | 22000 |    6000 |   15000 |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,course,fees,discount from student inner join fees on student.id = fees.sid;
+ERROR 1054 (42S22): Unknown column 'discount' in 'field list'
+MariaDB [internship_batch]> select name,course,fees,disount from student inner join fees on student.id = fees.sid;
++----------+--------+-------+---------+
+| name     | course | fees  | disount |
++----------+--------+-------+---------+
+| shivani  | ds     | 12000 |    2000 |
+| rohan    | ml     | 13000 |    1200 |
+| anisha   | aws    | 15000 |    2500 |
+| anushka  | aws    | 15000 |    1300 |
+| priyanka | python | 25000 |    2500 |
+| devraj   | cloud  | 22000 |    6000 |
++----------+--------+-------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student outer join fees on student.id = fees.sid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'outer join fees on student.id = fees.sid' at line 1
+MariaDB [internship_batch]> select * from student join fees on student.id = fees.sid;
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| id  | name     | course | gender | fid | sid  | fees  | disount | diposit |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| 101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 105 | devraj   | cloud  | male   |   6 |  105 | 22000 |    6000 |   15000 |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student join fees;
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| id  | name     | course | gender | fid | sid  | fees  | disount | diposit |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| 101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 101 | shivani  | ds     | female |   2 |  102 | 13000 |    1200 |   11000 |
+| 101 | shivani  | ds     | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 101 | shivani  | ds     | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 101 | shivani  | ds     | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 101 | shivani  | ds     | female |   6 |  105 | 22000 |    6000 |   15000 |
+| 102 | rohan    | ml     | male   |   1 |  101 | 12000 |    2000 |   10000 |
+| 102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 102 | rohan    | ml     | male   |   3 |  103 | 15000 |    2500 |    9000 |
+| 102 | rohan    | ml     | male   |   4 |  104 | 15000 |    1300 |    9000 |
+| 102 | rohan    | ml     | male   |   5 |  107 | 25000 |    2500 |   19000 |
+| 102 | rohan    | ml     | male   |   6 |  105 | 22000 |    6000 |   15000 |
+| 103 | anisha   | aws    | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 103 | anisha   | aws    | female |   2 |  102 | 13000 |    1200 |   11000 |
+| 103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 103 | anisha   | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 103 | anisha   | aws    | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 103 | anisha   | aws    | female |   6 |  105 | 22000 |    6000 |   15000 |
+| 104 | anushka  | aws    | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 104 | anushka  | aws    | female |   2 |  102 | 13000 |    1200 |   11000 |
+| 104 | anushka  | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 104 | anushka  | aws    | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 104 | anushka  | aws    | female |   6 |  105 | 22000 |    6000 |   15000 |
+| 105 | devraj   | cloud  | male   |   1 |  101 | 12000 |    2000 |   10000 |
+| 105 | devraj   | cloud  | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 105 | devraj   | cloud  | male   |   3 |  103 | 15000 |    2500 |    9000 |
+| 105 | devraj   | cloud  | male   |   4 |  104 | 15000 |    1300 |    9000 |
+| 105 | devraj   | cloud  | male   |   5 |  107 | 25000 |    2500 |   19000 |
+| 105 | devraj   | cloud  | male   |   6 |  105 | 22000 |    6000 |   15000 |
+| 106 | koashal  | python | male   |   1 |  101 | 12000 |    2000 |   10000 |
+| 106 | koashal  | python | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 106 | koashal  | python | male   |   3 |  103 | 15000 |    2500 |    9000 |
+| 106 | koashal  | python | male   |   4 |  104 | 15000 |    1300 |    9000 |
+| 106 | koashal  | python | male   |   5 |  107 | 25000 |    2500 |   19000 |
+| 106 | koashal  | python | male   |   6 |  105 | 22000 |    6000 |   15000 |
+| 107 | priyanka | python | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 107 | priyanka | python | female |   2 |  102 | 13000 |    1200 |   11000 |
+| 107 | priyanka | python | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 107 | priyanka | python | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 107 | priyanka | python | female |   6 |  105 | 22000 |    6000 |   15000 |
+| 108 | naresh   | ds     | male   |   1 |  101 | 12000 |    2000 |   10000 |
+| 108 | naresh   | ds     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 108 | naresh   | ds     | male   |   3 |  103 | 15000 |    2500 |    9000 |
+| 108 | naresh   | ds     | male   |   4 |  104 | 15000 |    1300 |    9000 |
+| 108 | naresh   | ds     | male   |   5 |  107 | 25000 |    2500 |   19000 |
+| 108 | naresh   | ds     | male   |   6 |  105 | 22000 |    6000 |   15000 |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+48 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student join fees on student.id = fees.sid;
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| id  | name     | course | gender | fid | sid  | fees  | disount | diposit |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| 101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 105 | devraj   | cloud  | male   |   6 |  105 | 22000 |    6000 |   15000 |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student left join fees on student.id = fees.sid;
++-----+----------+--------+--------+------+------+-------+---------+---------+
+| id  | name     | course | gender | fid  | sid  | fees  | disount | diposit |
++-----+----------+--------+--------+------+------+-------+---------+---------+
+| 101 | shivani  | ds     | female |    1 |  101 | 12000 |    2000 |   10000 |
+| 102 | rohan    | ml     | male   |    2 |  102 | 13000 |    1200 |   11000 |
+| 103 | anisha   | aws    | female |    3 |  103 | 15000 |    2500 |    9000 |
+| 104 | anushka  | aws    | female |    4 |  104 | 15000 |    1300 |    9000 |
+| 105 | devraj   | cloud  | male   |    6 |  105 | 22000 |    6000 |   15000 |
+| 106 | koashal  | python | male   | NULL | NULL |  NULL |    NULL |    NULL |
+| 107 | priyanka | python | female |    5 |  107 | 25000 |    2500 |   19000 |
+| 108 | naresh   | ds     | male   | NULL | NULL |  NULL |    NULL |    NULL |
++-----+----------+--------+--------+------+------+-------+---------+---------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees left join student on student.id = fees.sid;
++-----+------+-------+---------+---------+------+----------+--------+--------+
+| fid | sid  | fees  | disount | diposit | id   | name     | course | gender |
++-----+------+-------+---------+---------+------+----------+--------+--------+
+|   1 |  101 | 12000 |    2000 |   10000 |  101 | shivani  | ds     | female |
+|   2 |  102 | 13000 |    1200 |   11000 |  102 | rohan    | ml     | male   |
+|   3 |  103 | 15000 |    2500 |    9000 |  103 | anisha   | aws    | female |
+|   4 |  104 | 15000 |    1300 |    9000 |  104 | anushka  | aws    | female |
+|   5 |  107 | 25000 |    2500 |   19000 |  107 | priyanka | python | female |
+|   6 |  105 | 22000 |    6000 |   15000 |  105 | devraj   | cloud  | male   |
++-----+------+-------+---------+---------+------+----------+--------+--------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees right join student on student.id = fees.sid;
++------+------+-------+---------+---------+-----+----------+--------+--------+
+| fid  | sid  | fees  | disount | diposit | id  | name     | course | gender |
++------+------+-------+---------+---------+-----+----------+--------+--------+
+|    1 |  101 | 12000 |    2000 |   10000 | 101 | shivani  | ds     | female |
+|    2 |  102 | 13000 |    1200 |   11000 | 102 | rohan    | ml     | male   |
+|    3 |  103 | 15000 |    2500 |    9000 | 103 | anisha   | aws    | female |
+|    4 |  104 | 15000 |    1300 |    9000 | 104 | anushka  | aws    | female |
+|    6 |  105 | 22000 |    6000 |   15000 | 105 | devraj   | cloud  | male   |
+| NULL | NULL |  NULL |    NULL |    NULL | 106 | koashal  | python | male   |
+|    5 |  107 | 25000 |    2500 |   19000 | 107 | priyanka | python | female |
+| NULL | NULL |  NULL |    NULL |    NULL | 108 | naresh   | ds     | male   |
++------+------+-------+---------+---------+-----+----------+--------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student right join fees on student.id = fees.sid;
++------+----------+--------+--------+-----+------+-------+---------+---------+
+| id   | name     | course | gender | fid | sid  | fees  | disount | diposit |
++------+----------+--------+--------+-----+------+-------+---------+---------+
+|  101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |
+|  102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+|  103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+|  104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+|  107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |
+|  105 | devraj   | cloud  | male   |   6 |  105 | 22000 |    6000 |   15000 |
++------+----------+--------+--------+-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,id,fid from student left join fees on student.id = fees.sid;
++----------+-----+------+
+| name     | id  | fid  |
++----------+-----+------+
+| shivani  | 101 |    1 |
+| rohan    | 102 |    2 |
+| anisha   | 103 |    3 |
+| anushka  | 104 |    4 |
+| devraj   | 105 |    6 |
+| koashal  | 106 | NULL |
+| priyanka | 107 |    5 |
+| naresh   | 108 | NULL |
++----------+-----+------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,id,fid from student join fees on student.id = fees.sid;
++----------+-----+-----+
+| name     | id  | fid |
++----------+-----+-----+
+| shivani  | 101 |   1 |
+| rohan    | 102 |   2 |
+| anisha   | 103 |   3 |
+| anushka  | 104 |   4 |
+| devraj   | 105 |   6 |
+| priyanka | 107 |   5 |
++----------+-----+-----+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student join fees on student.id = fees.sid;
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| id  | name     | course | gender | fid | sid  | fees  | disount | diposit |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+| 101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |
+| 102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+| 103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+| 104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+| 107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |
+| 105 | devraj   | cloud  | male   |   6 |  105 | 22000 |    6000 |   15000 |
++-----+----------+--------+--------+-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,id,fid from student join fees;
++----------+-----+-----+
+| name     | id  | fid |
++----------+-----+-----+
+| shivani  | 101 |   1 |
+| shivani  | 101 |   2 |
+| shivani  | 101 |   3 |
+| shivani  | 101 |   4 |
+| shivani  | 101 |   6 |
+| shivani  | 101 |   5 |
+| rohan    | 102 |   1 |
+| rohan    | 102 |   2 |
+| rohan    | 102 |   3 |
+| rohan    | 102 |   4 |
+| rohan    | 102 |   6 |
+| rohan    | 102 |   5 |
+| anisha   | 103 |   1 |
+| anisha   | 103 |   2 |
+| anisha   | 103 |   3 |
+| anisha   | 103 |   4 |
+| anisha   | 103 |   6 |
+| anisha   | 103 |   5 |
+| anushka  | 104 |   1 |
+| anushka  | 104 |   2 |
+| anushka  | 104 |   3 |
+| anushka  | 104 |   4 |
+| anushka  | 104 |   6 |
+| anushka  | 104 |   5 |
+| devraj   | 105 |   1 |
+| devraj   | 105 |   2 |
+| devraj   | 105 |   3 |
+| devraj   | 105 |   4 |
+| devraj   | 105 |   6 |
+| devraj   | 105 |   5 |
+| koashal  | 106 |   1 |
+| koashal  | 106 |   2 |
+| koashal  | 106 |   3 |
+| koashal  | 106 |   4 |
+| koashal  | 106 |   6 |
+| koashal  | 106 |   5 |
+| priyanka | 107 |   1 |
+| priyanka | 107 |   2 |
+| priyanka | 107 |   3 |
+| priyanka | 107 |   4 |
+| priyanka | 107 |   6 |
+| priyanka | 107 |   5 |
+| naresh   | 108 |   1 |
+| naresh   | 108 |   2 |
+| naresh   | 108 |   3 |
+| naresh   | 108 |   4 |
+| naresh   | 108 |   6 |
+| naresh   | 108 |   5 |
++----------+-----+-----+
+48 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    2500 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    2500 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
+| 108 | naresh   | ds     | male   |
++-----+----------+--------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student left join fees on student.id = fees.sid;
++-----+----------+--------+--------+------+------+-------+---------+---------+
+| id  | name     | course | gender | fid  | sid  | fees  | disount | diposit |
++-----+----------+--------+--------+------+------+-------+---------+---------+
+| 101 | shivani  | ds     | female |    1 |  101 | 12000 |    2000 |   10000 |
+| 102 | rohan    | ml     | male   |    2 |  102 | 13000 |    1200 |   11000 |
+| 103 | anisha   | aws    | female |    3 |  103 | 15000 |    2500 |    9000 |
+| 104 | anushka  | aws    | female |    4 |  104 | 15000 |    1300 |    9000 |
+| 105 | devraj   | cloud  | male   |    6 |  105 | 22000 |    6000 |   15000 |
+| 106 | koashal  | python | male   | NULL | NULL |  NULL |    NULL |    NULL |
+| 107 | priyanka | python | female |    5 |  107 | 25000 |    2500 |   19000 |
+| 108 | naresh   | ds     | male   | NULL | NULL |  NULL |    NULL |    NULL |
++-----+----------+--------+--------+------+------+-------+---------+---------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student right join fees on student.id = fees.sid;
++------+----------+--------+--------+-----+------+-------+---------+---------+
+| id   | name     | course | gender | fid | sid  | fees  | disount | diposit |
++------+----------+--------+--------+-----+------+-------+---------+---------+
+|  101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |
+|  102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |
+|  103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |
+|  104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |
+|  107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |
+|  105 | devraj   | cloud  | male   |   6 |  105 | 22000 |    6000 |   15000 |
++------+----------+--------+--------+-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from address;
++-----+------+--------+---------------+
+| aid | sid  | city   | street        |
++-----+------+--------+---------------+
+|   1 |  101 | jaipur | raja park     |
+|   2 |  102 | jaipur | malviya nagar |
+|   3 |  103 | bhopal | tilak nagar   |
+|   4 |  104 | delhi  | vaishali      |
+|   5 |  107 | delhi  | patel nagar   |
++-----+------+--------+---------------+
+5 rows in set (0.05 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
+| 108 | naresh   | ds     | male   |
++-----+----------+--------+--------+
+8 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student where id in (select sid from address where city="jaipur");
++---------+
+| name    |
++---------+
+| shivani |
+| rohan   |
++---------+
+2 rows in set (0.06 sec)
+
+MariaDB [internship_batch]> select name from student inner join address on student.id = address.sid where city="jaipur";
++---------+
+| name    |
++---------+
+| shivani |
+| rohan   |
++---------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> tell me the name of students having fees>10000 and city =jaipur;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tell me the name of students having fees>10000 and city =jaipur' at line 1
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    2500 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    2500 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student inner join address on student.id=address.sid where city='jaipur' and fees>10000
+    ->
+    -> ;
+ERROR 1054 (42S22): Unknown column 'fees' in 'where clause'
+MariaDB [internship_batch]> select name from student inner join fees and address on student.id=fees.sid and student.id=address.sid where fees>10000 and city="jaipur";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and address on student.id=fees.sid and student.id=address.sid where fees>10000 a' at line 1
+MariaDB [internship_batch]> select name from student and fees from fees inner join address on student.id=address.sid and fees.id=fees.fid where city='jaipur' and fees>10000
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and fees from fees inner join address on student.id=address.sid and fees.id=fees' at line 1
+MariaDB [internship_batch]> select name from student inner join fees on student.id=fees.sid and inner join address on student.id=address.id where fees>10000 and city="jaipur";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'inner join address on student.id=address.id where fees>10000 and city="jaipur"' at line 1
+MariaDB [internship_batch]> select name from student inner joint (address on student.id=address.sid where city="jaipur" ) and (fees on student.id=fees.sid  where fees>10000)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'joint (address on student.id=address.sid where city="jaipur" ) and (fees on stud' at line 1
+MariaDB [internship_batch]> select name from student inner join (address on student.id=address.sid where city="jaipur" ) and (fees on student.id=fees.sid  where fees>10000)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'on student.id=address.sid where city="jaipur" ) and (fees on student.id=fees.sid' at line 1
+MariaDB [internship_batch]> select name from student inner join fees on student.id=fees.id where fees > 10000 (select name from student  join address on student.id = address.sid where city=jaipur)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(select name from student  join address on student.id = address.sid where city=j' at line 1
+MariaDB [internship_batch]> select name from student where id in (select sid from fees where fees>10000) and id in (select sid from address where city="jaipur");
++---------+
+| name    |
++---------+
+| shivani |
+| rohan   |
++---------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student inner join fees on student.id = fees.sid where fees>10000;
++----------+
+| name     |
++----------+
+| shivani  |
+| rohan    |
+| anisha   |
+| anushka  |
+| priyanka |
+| devraj   |
++----------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select id,name from student inner join fees on student.id = fees.sid where fees>10000;
++-----+----------+
+| id  | name     |
++-----+----------+
+| 101 | shivani  |
+| 102 | rohan    |
+| 103 | anisha   |
+| 104 | anushka  |
+| 107 | priyanka |
+| 105 | devraj   |
++-----+----------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> create view stu_view as select id,name from student inner join fees on student.id = fees.sid where fees>10000;
+Query OK, 0 rows affected (0.59 sec)
+
+MariaDB [internship_batch]> select * from stu_view;
++-----+----------+
+| id  | name     |
++-----+----------+
+| 101 | shivani  |
+| 102 | rohan    |
+| 103 | anisha   |
+| 104 | anushka  |
+| 107 | priyanka |
+| 105 | devraj   |
++-----+----------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student where id in (select sid from student where city="jaipur");
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+MariaDB [internship_batch]> select name from student where id in (select sid from address where city="jaipur");
++---------+
+| name    |
++---------+
+| shivani |
+| rohan   |
++---------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,fid,fees,sid,disount from student inner join fees on student.id = fees.sid;
++----------+-----+-------+------+---------+
+| name     | fid | fees  | sid  | disount |
++----------+-----+-------+------+---------+
+| shivani  |   1 | 12000 |  101 |    2000 |
+| rohan    |   2 | 13000 |  102 |    1200 |
+| anisha   |   3 | 15000 |  103 |    2500 |
+| anushka  |   4 | 15000 |  104 |    1300 |
+| priyanka |   5 | 25000 |  107 |    2500 |
+| devraj   |   6 | 22000 |  105 |    6000 |
++----------+-----+-------+------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> create view stu_fees as select name,fid,fees,sid,disount from student inner join fees on student.id = fees.sid;
+Query OK, 0 rows affected (0.02 sec)
+
+MariaDB [internship_batch]> select * from stu_fees;
++----------+-----+-------+------+---------+
+| name     | fid | fees  | sid  | disount |
++----------+-----+-------+------+---------+
+| shivani  |   1 | 12000 |  101 |    2000 |
+| rohan    |   2 | 13000 |  102 |    1200 |
+| anisha   |   3 | 15000 |  103 |    2500 |
+| anushka  |   4 | 15000 |  104 |    1300 |
+| priyanka |   5 | 25000 |  107 |    2500 |
+| devraj   |   6 | 22000 |  105 |    6000 |
++----------+-----+-------+------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> drop view stu_view;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [internship_batch]> select * from stu_view;
+ERROR 1146 (42S02): Table 'internship_batch.stu_view' doesn't exist
+MariaDB [internship_batch]> (select * from student inner join fees on student.id = fees.sid) inner join address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'inner join address' at line 1
+MariaDB [internship_batch]> select * from student inner join fees inner join address on student.id = fees.sid = address.sid;
+Empty set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student inner join fees inner join address on student.id = address.sid;
++-----+----------+--------+--------+-----+------+-------+---------+---------+-----+------+--------+---------------+
+| id  | name     | course | gender | fid | sid  | fees  | disount | diposit | aid | sid  | city   | street        |
++-----+----------+--------+--------+-----+------+-------+---------+---------+-----+------+--------+---------------+
+| 101 | shivani  | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan    | ml     | male   |   1 |  101 | 12000 |    2000 |   10000 |   2 |  102 | jaipur | malviya nagar |
+| 103 | anisha   | aws    | female |   1 |  101 | 12000 |    2000 |   10000 |   3 |  103 | bhopal | tilak nagar   |
+| 104 | anushka  | aws    | female |   1 |  101 | 12000 |    2000 |   10000 |   4 |  104 | delhi  | vaishali      |
+| 107 | priyanka | python | female |   1 |  101 | 12000 |    2000 |   10000 |   5 |  107 | delhi  | patel nagar   |
+| 101 | shivani  | ds     | female |   2 |  102 | 13000 |    1200 |   11000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan    | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |   2 |  102 | jaipur | malviya nagar |
+| 103 | anisha   | aws    | female |   2 |  102 | 13000 |    1200 |   11000 |   3 |  103 | bhopal | tilak nagar   |
+| 104 | anushka  | aws    | female |   2 |  102 | 13000 |    1200 |   11000 |   4 |  104 | delhi  | vaishali      |
+| 107 | priyanka | python | female |   2 |  102 | 13000 |    1200 |   11000 |   5 |  107 | delhi  | patel nagar   |
+| 101 | shivani  | ds     | female |   3 |  103 | 15000 |    2500 |    9000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan    | ml     | male   |   3 |  103 | 15000 |    2500 |    9000 |   2 |  102 | jaipur | malviya nagar |
+| 103 | anisha   | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |   3 |  103 | bhopal | tilak nagar   |
+| 104 | anushka  | aws    | female |   3 |  103 | 15000 |    2500 |    9000 |   4 |  104 | delhi  | vaishali      |
+| 107 | priyanka | python | female |   3 |  103 | 15000 |    2500 |    9000 |   5 |  107 | delhi  | patel nagar   |
+| 101 | shivani  | ds     | female |   4 |  104 | 15000 |    1300 |    9000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan    | ml     | male   |   4 |  104 | 15000 |    1300 |    9000 |   2 |  102 | jaipur | malviya nagar |
+| 103 | anisha   | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |   3 |  103 | bhopal | tilak nagar   |
+| 104 | anushka  | aws    | female |   4 |  104 | 15000 |    1300 |    9000 |   4 |  104 | delhi  | vaishali      |
+| 107 | priyanka | python | female |   4 |  104 | 15000 |    1300 |    9000 |   5 |  107 | delhi  | patel nagar   |
+| 101 | shivani  | ds     | female |   5 |  107 | 25000 |    2500 |   19000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan    | ml     | male   |   5 |  107 | 25000 |    2500 |   19000 |   2 |  102 | jaipur | malviya nagar |
+| 103 | anisha   | aws    | female |   5 |  107 | 25000 |    2500 |   19000 |   3 |  103 | bhopal | tilak nagar   |
+| 104 | anushka  | aws    | female |   5 |  107 | 25000 |    2500 |   19000 |   4 |  104 | delhi  | vaishali      |
+| 107 | priyanka | python | female |   5 |  107 | 25000 |    2500 |   19000 |   5 |  107 | delhi  | patel nagar   |
+| 101 | shivani  | ds     | female |   6 |  105 | 22000 |    6000 |   15000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan    | ml     | male   |   6 |  105 | 22000 |    6000 |   15000 |   2 |  102 | jaipur | malviya nagar |
+| 103 | anisha   | aws    | female |   6 |  105 | 22000 |    6000 |   15000 |   3 |  103 | bhopal | tilak nagar   |
+| 104 | anushka  | aws    | female |   6 |  105 | 22000 |    6000 |   15000 |   4 |  104 | delhi  | vaishali      |
+| 107 | priyanka | python | female |   6 |  105 | 22000 |    6000 |   15000 |   5 |  107 | delhi  | patel nagar   |
++-----+----------+--------+--------+-----+------+-------+---------+---------+-----+------+--------+---------------+
+30 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student inner join fees inner join address on student.id = address.sid where city="jaipur";
++-----+---------+--------+--------+-----+------+-------+---------+---------+-----+------+--------+---------------+
+| id  | name    | course | gender | fid | sid  | fees  | disount | diposit | aid | sid  | city   | street        |
++-----+---------+--------+--------+-----+------+-------+---------+---------+-----+------+--------+---------------+
+| 101 | shivani | ds     | female |   1 |  101 | 12000 |    2000 |   10000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan   | ml     | male   |   1 |  101 | 12000 |    2000 |   10000 |   2 |  102 | jaipur | malviya nagar |
+| 101 | shivani | ds     | female |   2 |  102 | 13000 |    1200 |   11000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan   | ml     | male   |   2 |  102 | 13000 |    1200 |   11000 |   2 |  102 | jaipur | malviya nagar |
+| 101 | shivani | ds     | female |   3 |  103 | 15000 |    2500 |    9000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan   | ml     | male   |   3 |  103 | 15000 |    2500 |    9000 |   2 |  102 | jaipur | malviya nagar |
+| 101 | shivani | ds     | female |   4 |  104 | 15000 |    1300 |    9000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan   | ml     | male   |   4 |  104 | 15000 |    1300 |    9000 |   2 |  102 | jaipur | malviya nagar |
+| 101 | shivani | ds     | female |   5 |  107 | 25000 |    2500 |   19000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan   | ml     | male   |   5 |  107 | 25000 |    2500 |   19000 |   2 |  102 | jaipur | malviya nagar |
+| 101 | shivani | ds     | female |   6 |  105 | 22000 |    6000 |   15000 |   1 |  101 | jaipur | raja park     |
+| 102 | rohan   | ml     | male   |   6 |  105 | 22000 |    6000 |   15000 |   2 |  102 | jaipur | malviya nagar |
++-----+---------+--------+--------+-----+------+-------+---------+---------+-----+------+--------+---------------+
+12 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,sid from student inner join fees inner join address on student.id = address.sid where city="jaipur" and fees>10000;
+ERROR 1052 (23000): Column 'sid' in field list is ambiguous
+MariaDB [internship_batch]> select name,address.sid from student inner join fees inner join address on student.id = address.sid where city="jaipur" and fees>10000;
++---------+------+
+| name    | sid  |
++---------+------+
+| shivani |  101 |
+| rohan   |  102 |
+| shivani |  101 |
+| rohan   |  102 |
+| shivani |  101 |
+| rohan   |  102 |
+| shivani |  101 |
+| rohan   |  102 |
+| shivani |  101 |
+| rohan   |  102 |
+| shivani |  101 |
+| rohan   |  102 |
++---------+------+
+12 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,address.sid from student inner join fees inner join address on (student.id = address.sid) and (student.id=fees.sid) where city="jaipur" and fees>10000;
++---------+------+
+| name    | sid  |
++---------+------+
+| shivani |  101 |
+| rohan   |  102 |
++---------+------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student inner join fees inner join address on (student.id = address.sid) and (student.id=fees.sid) where city="jaipur" and fees>10000; 
++---------+
+| name    |
++---------+
+| shivani |
+| rohan   |
++---------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]>

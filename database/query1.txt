@@ -1,0 +1,772 @@
+
+Setting environment for using XAMPP for Windows.
+Simran Grover@LAPTOP-JS358S5T c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| advancebatch       |
+| api_project        |
+| assign             |
+| bank_app           |
+| batch1             |
+| batch1030am        |
+| batch2pm           |
+| batch330           |
+| batch4pm           |
+| batch5pm           |
+| batch630           |
+| batch7pm           |
+| batch9am           |
+| blog               |
+| blog1              |
+| blog2              |
+| blogweb            |
+| db_grampower       |
+| information_schema |
+| internbatch2       |
+| internbatch8am     |
+| internproject      |
+| internship_batch   |
+| mcabatch           |
+| myprojectcgi       |
+| mysql              |
+| online_batch       |
+| pagalokabatch      |
+| performance_schema |
+| phpmyadmin         |
+| project            |
+| project1           |
+| project1130        |
+| project2           |
+| signup             |
+| student            |
+| student1           |
+| techinal_youth     |
+| test               |
+| userdata           |
+| zalakdb            |
++--------------------+
+41 rows in set (0.16 sec)
+
+MariaDB [(none)]> use internship_batch;
+Database changed
+MariaDB [internship_batch]> show tables;
++----------------------------+
+| Tables_in_internship_batch |
++----------------------------+
+| student                    |
++----------------------------+
+1 row in set (0.02 sec)
+
+MariaDB [internship_batch]> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| id     | int(5)       | YES  |     | NULL    |       |
+| name   | varchar(100) | YES  |     | NULL    |       |
+| course | varchar(100) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+3 rows in set (0.09 sec)
+
+MariaDB [internship_batch]> insert into student values(1,"simran","python");
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [internship_batch]> insert into student values(1,"devraj","ds");
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [internship_batch]> select * from student;
++------+--------+--------+
+| id   | name   | course |
++------+--------+--------+
+|    1 | simran | python |
+|    1 | devraj | ds     |
++------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> drop table student;
+Query OK, 0 rows affected (0.19 sec)
+
+MariaDB [internship_batch]> show tables;
+Empty set (0.00 sec)
+
+MariaDB [internship_batch]> create table student(id int(5) primary key,name varchar(100),course varchar(100),gender varchar(30));
+Query OK, 0 rows affected (0.10 sec)
+
+MariaDB [internship_batch]> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| id     | int(5)       | NO   | PRI | NULL    |       |
+| name   | varchar(100) | YES  |     | NULL    |       |
+| course | varchar(100) | YES  |     | NULL    |       |
+| gender | varchar(30)  | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+MariaDB [internship_batch]> alter table student modify column name varchar(100) not null;
+Query OK, 0 rows affected (0.41 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [internship_batch]> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| id     | int(5)       | NO   | PRI | NULL    |       |
+| name   | varchar(100) | NO   |     | NULL    |       |
+| course | varchar(100) | YES  |     | NULL    |       |
+| gender | varchar(30)  | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+MariaDB [internship_batch]> alter table student modify column id int(5) primary key auto_increment;
+ERROR 1068 (42000): Multiple primary key defined
+MariaDB [internship_batch]> alter table student modify column id int(5) auto_increment;
+Query OK, 0 rows affected (0.24 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [internship_batch]> desc student;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int(5)       | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(100) | NO   |     | NULL    |                |
+| course | varchar(100) | YES  |     | NULL    |                |
+| gender | varchar(30)  | YES  |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+4 rows in set (0.03 sec)
+
+MariaDB [internship_batch]> insert into student values(101,"shivani","ds","female");
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [internship_batch]> insert into student values(102,"rohan","ml","male");
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 101 | shivani | ds     | female |
+| 102 | rohan   | ml     | male   |
++-----+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> insert into student values("anisha","aws","female");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [internship_batch]> insert into student(name,course,gender) values("anisha","aws","female");
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 101 | shivani | ds     | female |
+| 102 | rohan   | ml     | male   |
+| 103 | anisha  | aws    | female |
++-----+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> insert into student(name,course,gender) values("anushka","aws","female"),("devraj","cloud","male"),("koashal","python","male"),("priyanka","python","female");
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where gender="male";
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 102 | rohan   | ml     | male   |
+| 105 | devraj  | cloud  | male   |
+| 106 | koashal | python | male   |
++-----+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course="python";
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student where course="python";
++----------+
+| name     |
++----------+
+| koashal  |
+| priyanka |
++----------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name,id from student where course="python";
++----------+-----+
+| name     | id  |
++----------+-----+
+| koashal  | 106 |
+| priyanka | 107 |
++----------+-----+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select id,name from student where course="python";
++-----+----------+
+| id  | name     |
++-----+----------+
+| 106 | koashal  |
+| 107 | priyanka |
++-----+----------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select id,name,gender from student where course="python";
++-----+----------+--------+
+| id  | name     | gender |
++-----+----------+--------+
+| 106 | koashal  | male   |
+| 107 | priyanka | female |
++-----+----------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course="python" and gender="male";
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 106 | koashal | python | male   |
++-----+---------+--------+--------+
+1 row in set (0.01 sec)
+
+MariaDB [internship_batch]> select * from student where course="python" and gender="other";
+Empty set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course="python" or course="aws";
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course="python" or course="aws" and gender="female";
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where (course="python" or course="aws") and gender="female";
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course="python" or (course="aws" and gender="female");
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course="ds" or course="aws" or course="python" or course="cloud";
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where not course="ml";
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> aggr functions --> min,max,sum,avg,count
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'aggr functions --> min,max,sum,avg,count' at line 1
+MariaDB [internship_batch]> select min(id) from student;
++---------+
+| min(id) |
++---------+
+|     101 |
++---------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select max(id) from student;
++---------+
+| max(id) |
++---------+
+|     107 |
++---------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select avg(id) from student;
++----------+
+| avg(id)  |
++----------+
+| 104.0000 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> avg --> 101 + 102 + 103 + 104 + 105 + 106 + 107/7;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'avg --> 101 + 102 + 103 + 104 + 105 + 106 + 107/7' at line 1
+MariaDB [internship_batch]> select sum(id) from student;
++---------+
+| sum(id) |
++---------+
+|     728 |
++---------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*) from student;
++----------+
+| count(*) |
++----------+
+|        7 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*) from student where course="python";
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*),name from student where course="python";
++----------+---------+
+| count(*) | name    |
++----------+---------+
+|        2 | koashal |
++----------+---------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*) from student where course="python";
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*) from student where course="python" and gender="female";
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(name) from student where course="python" and gender="female";
++-------------+
+| count(name) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(course) from student where course in ("aws","python","cloud");
++---------------+
+| count(course) |
++---------------+
+|             5 |
++---------------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course in ("aws","python","cloud");
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where course not in ("aws","python","cloud");
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 101 | shivani | ds     | female |
+| 102 | rohan   | ml     | male   |
++-----+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student where course in ("linux","python","ds");
++----------+
+| name     |
++----------+
+| shivani  |
+| koashal  |
+| priyanka |
++----------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student where course="aws" or gender="male";
++---------+
+| name    |
++---------+
+| rohan   |
+| anisha  |
+| anushka |
+| devraj  |
+| koashal |
++---------+
+5 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where gender not in ("male");
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student where gender in ("male");
++-----+---------+--------+--------+
+| id  | name    | course | gender |
++-----+---------+--------+--------+
+| 102 | rohan   | ml     | male   |
+| 105 | devraj  | cloud  | male   |
+| 106 | koashal | python | male   |
++-----+---------+--------+--------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> create table fees(fid int(5) primary key,sid int(5),fees double,disount double,diposit double,foreign key(sid) references student(id));
+Query OK, 0 rows affected (0.13 sec)
+
+MariaDB [internship_batch]> insert into fees values(1,101,12000,2000,10000);
+Query OK, 1 row affected (0.83 sec)
+
+MariaDB [internship_batch]> insert into fees values(1,102,13000,1200,11000);
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+MariaDB [internship_batch]> insert into fees values(2,102,13000,1200,11000);
+Query OK, 1 row affected (0.38 sec)
+
+MariaDB [internship_batch]> insert into fees values(3,103,15000,3000,9000);
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
++-----+------+-------+---------+---------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> insert into fees values(4,108,15000,3000,9000);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`internship_batch`.`fees`, CONSTRAINT `fees_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student` (`id`))
+MariaDB [internship_batch]> insert into fees values(4,104,15000,1300,9000);
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [internship_batch]> insert into fees values(5,107,25000,5000,19000);
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
++-----+------+-------+---------+---------+
+5 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> insert into fees values(6,105,22000,6000,15000);
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees where fees>=15000;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees where fees>=15000 and disount>=5000;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   5 |  107 | 25000 |    5000 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+2 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> tell me the name of students having fees>=15000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tell me the name of students having fees>=15000' at line 1
+MariaDB [internship_batch]> desc fees;
++---------+--------+------+-----+---------+-------+
+| Field   | Type   | Null | Key | Default | Extra |
++---------+--------+------+-----+---------+-------+
+| fid     | int(5) | NO   | PRI | NULL    |       |
+| sid     | int(5) | YES  | MUL | NULL    |       |
+| fees    | double | YES  |     | NULL    |       |
+| disount | double | YES  |     | NULL    |       |
+| diposit | double | YES  |     | NULL    |       |
++---------+--------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+MariaDB [internship_batch]> select name from fees;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+MariaDB [internship_batch]> desc student;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int(5)       | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(100) | NO   |     | NULL    |                |
+| course | varchar(100) | YES  |     | NULL    |                |
+| gender | varchar(30)  | YES  |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+4 rows in set (0.03 sec)
+
+MariaDB [internship_batch]> select name from student and select fees from fees where fees>=15000
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and select fees from fees where fees>=15000' at line 1
+MariaDB [internship_batch]> select sid from fees where fees >=15000;
++------+
+| sid  |
++------+
+|  103 |
+|  104 |
+|  107 |
+|  105 |
++------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select name from student where id in (103,104,107,105);
++----------+
+| name     |
++----------+
+| anisha   |
+| anushka  |
+| devraj   |
+| priyanka |
++----------+
+4 rows in set (0.01 sec)
+
+MariaDB [internship_batch]> select name from student where id in (select sid from fees where fees>=15000);
++----------+
+| name     |
++----------+
+| anisha   |
+| anushka  |
+| devraj   |
+| priyanka |
++----------+
+4 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from student;
++-----+----------+--------+--------+
+| id  | name     | course | gender |
++-----+----------+--------+--------+
+| 101 | shivani  | ds     | female |
+| 102 | rohan    | ml     | male   |
+| 103 | anisha   | aws    | female |
+| 104 | anushka  | aws    | female |
+| 105 | devraj   | cloud  | male   |
+| 106 | koashal  | python | male   |
+| 107 | priyanka | python | female |
++-----+----------+--------+--------+
+7 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select * from fees;
++-----+------+-------+---------+---------+
+| fid | sid  | fees  | disount | diposit |
++-----+------+-------+---------+---------+
+|   1 |  101 | 12000 |    2000 |   10000 |
+|   2 |  102 | 13000 |    1200 |   11000 |
+|   3 |  103 | 15000 |    3000 |    9000 |
+|   4 |  104 | 15000 |    1300 |    9000 |
+|   5 |  107 | 25000 |    5000 |   19000 |
+|   6 |  105 | 22000 |    6000 |   15000 |
++-----+------+-------+---------+---------+
+6 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select diposit from fees where sid in (select id from student where course="aws" or course="ds");
++---------+
+| diposit |
++---------+
+|   10000 |
+|    9000 |
+|    9000 |
++---------+
+3 rows in set (0.00 sec)
+
+MariaDB [internship_batch]> select sum(fees) from fees;
++-----------+
+| sum(fees) |
++-----------+
+|    102000 |
++-----------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select sum(diposit) from fees;
++--------------+
+| sum(diposit) |
++--------------+
+|        73000 |
++--------------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select avg(discount) from fees;
+ERROR 1054 (42S22): Unknown column 'discount' in 'field list'
+MariaDB [internship_batch]> select avg(dicount) from fees;
+ERROR 1054 (42S22): Unknown column 'dicount' in 'field list'
+MariaDB [internship_batch]> select avg(disount) from fees;
++--------------------+
+| avg(disount)       |
++--------------------+
+| 3083.3333333333335 |
++--------------------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select min(discount) from fees;
+ERROR 1054 (42S22): Unknown column 'discount' in 'field list'
+MariaDB [internship_batch]> select min(disount) from fees;
++--------------+
+| min(disount) |
++--------------+
+|         1200 |
++--------------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select max(disount) from fees;
++--------------+
+| max(disount) |
++--------------+
+|         6000 |
++--------------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> select count(*) from fees where fees>10000 and id in (select sid from student where course = "python");
+ERROR 1054 (42S22): Unknown column 'id' in 'IN/ALL/ANY subquery'
+MariaDB [internship_batch]> select count(*) from fees where fees>10000 and (id in (select sid from student where course = "python"));
+ERROR 1054 (42S22): Unknown column 'id' in 'IN/ALL/ANY subquery'
+MariaDB [internship_batch]> select count(*) from fees where fees>10000 and sid in (select id from student where course = "python"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [internship_batch]> select count(*) from fees where fees>10000 and sid in (select id from student where course = "python");
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+MariaDB [internship_batch]> ERD --> Entity Relationship Diagram

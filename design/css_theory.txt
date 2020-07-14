@@ -1,0 +1,34 @@
+CSS 
+    Cascade Style Sheet
+    properties 200-300 approx
+1. Inline (in that particular tag)(style attribute)
+2. Internal (head)(style tag)
+3. External(externally css file)
+style="property_name:property_value"
+<p style="color:red">This is my paragraph<p>
+<p style="color:red;font-family:sans serif">Paragraph</p>
+
+Internal:
+
+    <style>
+        tag_name1,tag_name2..... {
+            property_name : property_value;
+            property_name : property_value;
+        }
+        .main,p{
+            color : red;
+        }
+        #l,.abc,li{
+            color : white;
+        }
+    </style>
+    id --> #, class  --> .
+    <body>
+    <label class="main">hello</label>
+    <label class="main">hi</label>
+    <label id="l">bye</label>
+
+Hover
+tag_name : hover{
+    background-color : white;
+}

@@ -1,0 +1,14 @@
+body{
+    background: linear-gradient(#34abca,#FF5733,#AE7569);
+}
+a{
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    text-decoration: none;
+    color: black;
+}
+li{
+    display: inline;
+    padding: 20px;
+}

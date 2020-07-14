@@ -1,0 +1,16 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        {% include "afterlogin.html" %}
+        {% block head %}
+        {% endblock %}
+        
+        <form action="/blog/afterblog/" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="SUBMIT">
+        </form>
+    </body>
+</html>

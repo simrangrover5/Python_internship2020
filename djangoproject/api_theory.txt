@@ -1,0 +1,21 @@
+        1. Api --> url --> work
+        2. method --> get --> url --> data get
+        3. method --> post --> url --> data insert
+        4. method --> put --> url
+        5. method --> delete --> url
+
+In making your own Api
+    1. url (API)
+    2. method
+
+Flask --> api --> flaskrestapi
+Django --> api --> djangorestframework
+#pip install djangorestframework
+difference between REST and SOAP api???
+
+REST --> json format
+Soap --> xml format
+
+Serializers??
+Python data type--> json data type
+model --> data --> serializer_class --> json 

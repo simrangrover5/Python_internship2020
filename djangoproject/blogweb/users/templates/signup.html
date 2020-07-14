@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <style>
+            form{
+               padding-left: 5%;
+               padding-top: 5%;
+            }
+            p{
+                color: whitesmoke;
+                font-size: 30px;
+                font-style: italic;
+                font-family: cursive;
+            }
+            body{
+                background-color: teal;
+            }
+            div{
+                background-color: black;
+                margin-top: 10%;
+                margin-left: 30%;
+                width: 40%;
+                height: 70%;
+            }
+            a{
+                color: coral;
+                text-decoration: none;
+            }
+            #sub{
+                background-color: rosybrown;
+                color: black;
+                margin-left: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="color: red;">{{error}}</h1>
+        <div>
+        <form method="POST" action="/user/aftersignup/" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="SIGNUP" id="sub">
+            <a href="/user/signin/">REGISTERED?</a>
+        </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color: black;
+        }
+            h1,p{
+                color: coral;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>This is my first project on flask</h1>
+        <mark>I am very happy</mark>
+        {% if n %}
+        <h1>Welcome {{ n }} has interest in {{inter}}</h1>
+        {% endif %}
+        {% if data %}
+        {% for key,value in data.items() %}
+        <h1 style="color:red">{{ key }} = {{ value }}</h1>
+        {% endfor %}
+        {% endif %}
+    </body>
+</html>

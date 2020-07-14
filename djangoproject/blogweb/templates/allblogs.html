@@ -1,0 +1,40 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        {% include "afterlogin.html" %}
+        {% block head %}
+        {% endblock %}
+        <form action="/blog/search/" method="POST">
+            {% csrf_token %}
+            <select name="category">
+                <option value="entertain">
+                    Entertainment
+                </option>
+                <option value="edu">
+                    Education
+                </option>
+                <option value="kids">
+                    Kid
+                </option>
+                <option value="food">
+                    Food
+                </option>
+                <option value="other">
+                    other
+                </option>
+            </select>
+            <input type="submit" value="SUBMIT">
+        </form>
+        <center>
+        {% for i in blogs %}
+        <h1>{{ i.title }}</h1>
+        <p>{{i.post}}</p>
+        <h3>{{i.email}}</h3>
+        <h3>{{i.date}}</h3>
+        <hr>
+        {% endfor %}
+        </center>
+    </body>
+</html>
